@@ -11,7 +11,7 @@ fun main() {
         left to right
     }
 
-    println("Day Twelve")
+    println("Day Fourteen")
     println("Part One: ${applyInstructions(template, rules, 10)}")
     println("Part Two: ${applyInstructions(template, rules, 40)}")
     println()

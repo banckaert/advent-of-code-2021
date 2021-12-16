@@ -8,7 +8,7 @@ fun main() {
         .split("${lineSeparator()}${lineSeparator()}")
         .let { Instructions(it.first().toPoints(), it.last().toFolds()) }
 
-    println("Day Twelve")
+    println("Day Thirteen")
     println("Part One: ${follow(instructions, 1).size}")
     println("Part Two: ${follow(instructions).print()}")
     println()
