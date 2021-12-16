@@ -22,16 +22,16 @@ class Literal(binary: String) : Packet(binary) {
     override fun decode() = binary.drop(6).chunked(5).joinToString("") { it.drop(1) }.toLong(2)
 }
 
-class Operator(binary: String, private val subs: List<Packet>) : Packet(binary) {
-    override fun version() = super.version() + subs.sumOf { it.version() }
+class Operator(binary: String, private val subPackets: List<Packet>) : Packet(binary) {
+    override fun version() = super.version() + subPackets.sumOf { it.version() }
     override fun decode(): Long = when (type) {
-        0 -> subs.sumOf { it.decode() }
-        1 -> subs.fold(1) { acc, packet -> acc * packet.decode() }
-        2 -> subs.minOf { it.decode() }
-        3 -> subs.maxOf { it.decode() }
-        5 -> if (subs[0].decode() > subs[1].decode()) 1L else 0L
-        6 -> if (subs[0].decode() < subs[1].decode()) 1L else 0L
-        7 -> if (subs[0].decode() == subs[1].decode()) 1L else 0L
+        0 -> subPackets.sumOf { it.decode() }
+        1 -> subPackets.fold(1) { acc, packet -> acc * packet.decode() }
+        2 -> subPackets.minOf { it.decode() }
+        3 -> subPackets.maxOf { it.decode() }
+        5 -> if (subPackets[0].decode() > subPackets[1].decode()) 1L else 0L
+        6 -> if (subPackets[0].decode() < subPackets[1].decode()) 1L else 0L
+        7 -> if (subPackets[0].decode() == subPackets[1].decode()) 1L else 0L
         else -> error("No such Type ID: $type")
     }
 }
