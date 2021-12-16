@@ -28,7 +28,7 @@ private fun expand(grid: List<List<Int>>): List<List<Int>> {
 }
 
 private fun dijkstra(grid: List<List<Int>>): Int {
-    var priorityQueue = mutableListOf(Triple(0, 0, 0))
+    val priorityQueue = mutableListOf(Triple(0, 0, 0))
     val costs = mutableMapOf<Pair<Int, Int>, Int>()
     while (true) {
         val (cost, x, y) = priorityQueue.removeAt(0)
